@@ -1,35 +1,75 @@
-img="";
-status="";
-function preload(){
-img = loadImage('dog_cat.jpg');
+x = 0;
+y = 0;
+apple = "";
+speakdata = "";
+to_number = "";
+draw_apple = "";
+
+var SpeechRecognition = window.webkitSpeechRecognition;
+  
+var recognition = new SpeechRecognition();
+
+function start()
+{
+  document.getElementById("status").innerHTML = "System is listening please speak";  
+  recognition.start();
+} 
+ 
+recognition.onresult = function(event) {
+
+ console.log(event); 
+
+ content = event.results[0][0].transcript;
+ to_number = Number(content);
+ if(Number.isInteger(to_number))
+    document.getElementById("status").innerHTML = "The speech has been recognized: " + content; 
+    document.getElementById("status").innerHTML = "Started Drawing apples " + draw_apple ="set";
+  
 }
+
+else if(Number.isInteger(to_number)
+
 function setup() {
-    canvas = createCanvas(640, 420);
-    canvas.center();
-    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-    document.getElementById('status') = "Status = Detcting Objects";
+screen_width = window.innerwidth
+screen_height = window.innerheight;
 }
+
 function draw() {
-    image(img, 0, 0, 640, 420);
-    fill("FF0000");
-    text("Dog", 45, 75);
-    noFill();
-    stroke("#FF0000");
-   rect(30, 60, 450, 350);
-   fill("FF0000");
-   text("Cat", 320, 120)
-   noFill()
-   stroke("#FF0000");
-   rect(300, 90, 270, 320);
-}
-function modelLoaded() {
-    console.log("Model loaded!");
-    status = true;
-    ObjectDetector.detect(img, gotResult);
-}
-function gotResult(error, result) {
-    if (error) {
-        console.log (error);
+  if(draw_apple == "set") 
+  {
+    document.getElementById("status").innerHTML = to_number + " Apples drawn";
+    draw_apple = "";
+    to_number = "Apples Drawn";
+    speak()
+    for(var i = 1; i <= to_number; i++)
+    {
+      x = Math.floor(Math.random() * 700);
+      x = Math.floor(Math.random() * 400);
+      Image(apple, x, y, 50, 50);
     }
-    console.log(results);
+  }
+}
+
+function speak(){;
+    var synth = window.speechSynthesis;
+
+    var utterThis = new SpeechSynthesisUtterance(speak_data);
+
+    synth.speak(utterThis);
+
+    speak_data = "";
+}
+function preload() {
+  apple = "apple.png"
+}
+function createCanvas()
+createcanvas()
+screen_width = 150;
+screen_height = 150;
+apple.png = 
+function image()
+{
+apple =  apple.png; 
+
+
 }
